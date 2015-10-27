@@ -8,6 +8,8 @@ import json
 import csv
 import glob
 import os
+import requests
+
 
 
 br = mechanize.Browser()
@@ -148,6 +150,8 @@ def create_webpage(filename):
 				tags.append(j)
 				html+='<td>' + j + '</td>'
 			html+=' </tr>'
+        
+		html+='</table></body></html>'
 
 		with open('classes/'+title.replace(' ','-').replace('/','').replace(';','')+'.html','w') as output:
 			output.write(html)
@@ -192,11 +196,24 @@ def send_to_be_indexed(items):
 			output.write('{"title":'+ title +',"text":'+ text +',"tags":'+ tags +',"url": '+url+'},\n')
 		output.write(']};')
 
+def getRating():
+	morph_api_url = "https://api.morph.io/chrisguags/ratemyprofessors/data.json"
+	morph_api_key = "Mmi/D8eRmLgEZ3nMU22y"
+	r = requests.get(morph_api_url, params={'key': morph_api_key,'query': "select * from 'data' limit 1"})
+	print r.json()
 
-def main():
+
+
+def update():
+	setup_browser()
 	download_classes()
 	format_classes()
 	create_all_webpages()
+
+
+def main():
+	setup_browser()
+	getRating()
 
 
 if __name__ == '__main__':
