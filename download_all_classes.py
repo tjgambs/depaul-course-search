@@ -203,7 +203,6 @@ def getRating():
 	print r.json()
 
 
-
 def update():
 	setup_browser()
 	download_classes()
@@ -213,7 +212,8 @@ def update():
 
 def main():
 	setup_browser()
-	getRating()
+	create_all_webpages()
+	
 
 
 if __name__ == '__main__':
