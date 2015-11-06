@@ -130,7 +130,7 @@ def format_classes():
 def overall_rating(first,last):
 	reader = csv.DictReader(open('teachers.csv'))
 	for row in reader:
-		if first == row['teacherfirstname_t'] and last == row['teacherlastname_t']:
+		if first.lower() == row['teacherfirstname_t'].lower() and last.lower() == row['teacherlastname_t'].lower():
 			return row['averageratingscore_rf']
 	return 'N/A'
 
