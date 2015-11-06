@@ -1,19 +1,16 @@
+#Created by Timothy Gamble
+#tjgambs@gmail.com
+
 from BeautifulSoup import BeautifulSoup as Soup
 import urllib
-import mechanize
-import getpass
 import cookielib
-import time
+import mechanize
 import json
 import csv
-import glob
-import os
-import requests
-
-
 
 br = mechanize.Browser()
 cj = cookielib.LWPCookieJar()
+
 
 def setup_browser():
 	br.set_cookiejar(cj)
@@ -26,6 +23,7 @@ def setup_browser():
 
 
 def download_classes():
+	setup_browser()
 	response = br.open("http://offices.depaul.edu/student-records/schedule-of-classes/Pages/default.aspx")
 	
 	br.select_form(nr=0)
@@ -37,8 +35,6 @@ def download_classes():
 	soup = Soup(html)
 
 	courses = []
-
-	downloaded = 1
 
 	with open('classes.json','w') as output:
 
@@ -55,12 +51,12 @@ def download_classes():
 				html = urllib.urlopen(url+i['href'][start:])
 				data = json.loads(str(Soup(html)))
 
-				print 'Downloaded ' + str(downloaded) + ' url'
-				downloaded+=1
+				print 'Downloaded ' + str(url+i['href'][start:])
 				courses.append([i.text,course_description,data])
 
 		json.dump(courses, output)
 		format_classes()
+
 
 def format_classes():
 	headers = ['Credit Hours', 'Teacher First Name', 'Teacher Last Name', 'Class Start Time', 'Class End Time', 'Class Section', 'Class Number', 'Location', 'Days']
@@ -127,94 +123,8 @@ def format_classes():
 				for row in array_of_class_data:
 					writer.writerow(row)
 
-def create_webpage(filename):
-	with open(filename,'r') as class_data:
-		reader = csv.reader(class_data)
-		info = list(reader)
-
-		title = info[0][0]
-		course_description = info[1][0]
-		tags = []
-
-		html = '<!DOCTYPE html><html><head><title>'+title+'</title><link rel="stylesheet" type="text/css" href="../stylesheet.css"></head>'
-		html += '<h1>'+title+'</h1><body>'+course_description+'<h2>Available Classes</h2><table class="bordered">'
-		html+='<thead><tr>'
-		for i in info[2]:
-			tags.append(i)
-			html+='<th>' + i + '</th>'
-		html+=' </tr></thead>'
-		
-		for i in info[3:]:
-			html+='<tr>'
-			for j in i:
-				tags.append(j)
-				html+='<td>' + j + '</td>'
-			html+=' </tr>'
-        
-		html+='</table></body></html>'
-
-		with open('classes/'+title.replace(' ','-').replace('/','').replace(';','')+'.html','w') as output:
-			output.write(html)
-
-		tags = list(set(tags))
-		tags = filter(None, tags)
-		return [title, course_description,tags,('classes/'+title.replace(' ','-').replace('/','').replace(';','')+'.html')]
-
-def create_all_webpages():
-	files = []
-	for file in os.listdir("class_data"):
-		if file.endswith("csv"): 
-			files.append(file)
-	to_be_indexed = []
-
-	for i in files:
-		to_be_indexed.append(create_webpage('class_data/'+i))
-
-	send_to_be_indexed(to_be_indexed)
-
-
-def send_to_be_indexed(items):
-
-	with open('tipuesearch/tipuesearch_content.js','w') as output:
-		output.write('var tipuesearch = {"pages": [\n')
-		for i in items:
-			title = '""'
-			text = '""'
-			tags ='""'
-			url = '""'
-
-			if i[0]:
-				title = '"{0}"'.format(i[0].replace("\"",'').replace("\r\n",'').replace("\n",''))
-			if i[1]:
-				text = '"{0}"'.format(i[1][:300].replace("\"",'').replace("\r\n",'').replace("\n",''))
-			if i[2]:
-				tags = ', '.join('{0}'.format(j) for j in set(i[2]))
-				tags = '"{0}"'.format(tags.replace("\"",'').replace("\r\n",'').replace("\n",''))
-			if i[3]:
-				url = '"{0}"'.format(i[3].replace("\"","\'"))
-
-			output.write('{"title":'+ title +',"text":'+ text +',"tags":'+ tags +',"url": '+url+'},\n')
-		output.write(']};')
-
-def getRating():
-	morph_api_url = "https://api.morph.io/chrisguags/ratemyprofessors/data.json"
-	morph_api_key = "Mmi/D8eRmLgEZ3nMU22y"
-	r = requests.get(morph_api_url, params={'key': morph_api_key,'query': "select * from 'data' limit 1"})
-	print r.json()
-
-
-def update():
-	setup_browser()
-	download_classes()
-	format_classes()
-	create_all_webpages()
-
-
 def main():
-	setup_browser()
-	create_all_webpages()
-	
-
+	download_classes()
 
 if __name__ == '__main__':
 	main()
