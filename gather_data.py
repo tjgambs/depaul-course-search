@@ -206,7 +206,7 @@ def create_teacher_webpage(id,values):
 
 def create_all_teacher_webpages():
 	data = gather_data()
-	for i in data[2878:]:
+	for i in data:
 		rating = '0'
 		helpful = '0'
 		clarity = '0'
