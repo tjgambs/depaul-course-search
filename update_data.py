@@ -59,7 +59,7 @@ def download_classes():
 
 
 def format_classes():
-	headers = ['Credit Hours', 'Teacher First Name', 'Teacher Last Name', 'Class Start Time', 'Class End Time', 'Class Section', 'Class Number', 'Location', 'Days']
+	headers = ['RMP Overall','Credit Hours', 'Teacher First Name', 'Teacher Last Name', 'Class Start Time', 'Class End Time', 'Class Section', 'Class Number', 'Location', 'Days']
 
 	with open('classes.json','r') as input:
 		class_data = json.load(input)
@@ -95,6 +95,7 @@ def format_classes():
 					if key.strip().lower() == 'location_descr':
 						class_location = str(value)
 
+
 					if key.strip().lower() == 'mon' and value.strip().lower() == 'y':
 						days[0] = 'Monday'
 					if key.strip().lower() == 'tues' and value.strip().lower() == 'y':
@@ -113,7 +114,9 @@ def format_classes():
 				days = filter(lambda a: a != 0, days)
 				days =','.join(days)
 
-				array_of_class_data.append([credit_hours,teacher_first_name,teacher_last_name,class_start_time,class_end_time,class_section,class_number,class_location,days])
+				rmp_overall = overall_rating(teacher_first_name,teacher_last_name)
+
+				array_of_class_data.append([rmp_overall,credit_hours,teacher_first_name,teacher_last_name,class_start_time,class_end_time,class_section,class_number,class_location,days])
 			with open('class_data/'+ class_name.replace('/','').replace(';','') +'.csv','w') as formatted_class:
 				writer = csv.writer(formatted_class)
 				writer.writerow([class_name])
@@ -123,8 +126,18 @@ def format_classes():
 				for row in array_of_class_data:
 					writer.writerow(row)
 
+
+def overall_rating(first,last):
+	reader = csv.DictReader(open('teachers.csv'))
+	for row in reader:
+		if first == row['teacherfirstname_t'] and last == row['teacherlastname_t']:
+			return row['averageratingscore_rf']
+	return 'N/A'
+
+
 def main():
-	download_classes()
+	format_classes()
+	#download_classes()
 
 if __name__ == '__main__':
 	main()

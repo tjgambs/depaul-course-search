@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta name="monitor" content="nagios" /><link type="text/css" rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,400italic,600italic|Open+Sans+Condensed:300,700,300italic" /><link rel="shortcut icon" href="/_layouts/images/favicon.ico" type="image/vnd.microsoft.icon" /><title>
+	Page Not Found (404) | DePaul University
+</title><link rel="shortcut icon" href="/_layouts/images/favicon.ico" /><link type="text/css" rel="stylesheet" href="/_layouts/DU.SPBaseLibs/Styles/responsive.min.css" />
+    <style>
+        .logo-short {
+            background: url("/Style Library/Images/dpu-logo-short.png") no-repeat;
+        }  
+        .editor-login {
+            display:none;
+        }          
+    </style>
+</head>
+<body class="theme-dpu-blue1">
+    <form name="form1" method="post" action="dpu404.aspx?404%3bhttp%3a%2f%2flas.depaul.edu%3a80%2fdepartments%2fmodern-languages%2ffaculty%2fPublishingImages%2fOrtega+Hernandez+ML_Picture+(002).jpg" id="form1">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJNjU4MzgwMTIxZGRt9G+bFho/NWHBj1s+F6P2yDi2fw==" />
+
+<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="BE11765F" />
+        <div class="body-content">
+            <div id="ga-masthead" class="line masthead">
+                <div class="unit size5of5 dpu-logo" style="padding-top:28px;">
+                    
+            <a class="unit logo-short" href="http://www.depaul.edu/Pages/default.aspx">DePaul University</a><a class="unit h1 site-title-long" href="/Pages/default.aspx">College of Liberal Arts and Social Sciences</a><a class="unit h1 site-title-short" href="/Pages/default.aspx">College of LAS</a>
+            ​​​​​​<span id="ms-rterangecursor-start" style="display: none;"></span><span id="ms-rterangecursor-end" style="display: none;"></span>
+                </div>
+            </div>
+        </div>
+        <nav id="ga-global" class="line"></nav>
+        <div class="line content-body">
+            <div class="line content-body nomargin-top">
+                <div id="ga-maincontent" class="unit size1of1">
+                    <h1>Page not found (error 404)</h1>
+<p>We were unable to find the resource you requested. Please check the URL to ensure the path is correct.</p>
+<p>You may also use the following resources to locate a page:</p>
+<ul><li><a onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;404&#39;, &#39;Search&#39;]);" href="http://search.depaul.edu/">Search</a></li>
+<li><a onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;404&#39;, &#39;DPU Home Body&#39;]);" href="http://www.depaul.edu/">Home page</a></li></ul>
+<p><a onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;404&#39;, &#39;Feedback&#39;]);" href="http://www.depaul.edu/utilities/Pages/feedback.aspx">Report broken links here</a></p>
+<br/>​​<span id="ms-rterangecursor-start" style="display: none;"></span><span id="ms-rterangecursor-end" style="display: none;"></span>
+                </div>
+            </div>
+        </div>
+        <footer>
+        <div id="ga-footer" class="footer">
+
+<div class="unit size1of1"><h5>College of Liberal Arts and Social Sciences</h5></div>
+
+              <div class="unit size1of3 small">
+
+            
+                <p><strong><a href="/faculty-and-staff/Pages/undergraduate-student-office.aspx">Undergraduate College Office</a></strong><br/>
+                  Lincoln Park Campus<br/>
+               2352 N. Clifton Ave., Suite 130<br/>
+                Chicago, IL 60614<br/>
+                <a href="tel:773-325-7310">(773) 325-7310</a><br/>
+                <a href="mailto:lasadvising@depaul.edu">lasadvising@depaul.edu</a></p></div>
+
+
+<div class="unit size1of3 small">
+
+                  <p><strong><a href="/faculty-and-staff/Pages/graduate-student-office.aspx">Graduate Office</a></strong><br/>
+                    Lincoln Park Campus<br/>
+                  990 W. Fullerton Ave., Suite 1200<br/>
+                     Chicago, IL 60614<br/>
+                     <a href="tel:773-325-4008">(773) 325-4008</a><br/>
+                     <a href="mailto:lasgraduateoffice@depaul.edu">lasgraduateoffice@depaul.edu</a></p></div>
+
+
+<div class="unit size1of3 small golden-margin-bottom">
+                  
+                  <p><strong><a href="/faculty-and-staff/Pages/office-of-graduate-admission.aspx">Graduate Admission</a></strong><br/>
+                    DePaul University Welcome Center<br/>
+                  2400 N. Sheffield Ave.<br/>
+                     Chicago, IL 60614<br/>
+                     <a href="tel:773-325-7315">(773) 325-7315</a><br/>
+                     <a href="mailto:graddepaul@depaul.edu">graddepaul@depaul.edu</a>
+                 </p>
+                </div>
+  
+  
+
+
+          
+<div id="ga-copyright" class="line clear-both copyright"><p class="unit size5of5 small"><a href="http://www.depaul.edu/Pages/copyright.aspx"> 2001-2014</a> DePaul University | <a href="http://www.depaul.edu/Pages/disclaimer.aspx">Disclaimer</a> | <a href="http://www.depaul.edu/Pages/contact-us.aspx">Contact Us</a> | <a href="http://emergencyplan.depaul.edu/Pages/default.aspx">Emergency Plan</a> | <a href="http://www.depaul.edu/Pages/consumer-info.aspx">Consumer Information</a> | <a href="http://go.depaul.edu/privacy">Privacy Statement</a> <a class="unitRight editor-login" href="#">Editor Login</a></p></div>
+  
+ </div>
+​<span id="ms-rterangecursor-start" style="display: none;"></span><span id="ms-rterangecursor-end" style="display: none;"></span>        
+        </footer>
+    </form>
+</body>
+</html>

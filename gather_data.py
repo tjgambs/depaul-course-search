@@ -3,9 +3,12 @@
 #Created by Timothy Gamble
 #tjgambs@gmail.com
 
+from BeautifulSoup import BeautifulSoup as Soup
 import urllib
 import json
 import csv
+import os
+import unidecode
 
 #The id number of your school can be found in the ratemyprofessor link. For example
 #the link of a universities page might look like this: 
@@ -105,8 +108,125 @@ def export_to_csv():
 	    dict_writer.writerows(data)
 
 
+def pages_of_reviews(id):
+	counter = 1
+	url = 'http://www.ratemyprofessors.com/paginate/professors/ratings?tid=' + str(id) + '&page=' + str(counter)
+	page = urllib.urlopen(url).read()
+	
+	data = json.loads(page)
+	number_of_reviews = int(data['remaining'])
+	return number_of_reviews/20+2
+
+def get_all_reviews(id):
+	reviews = []
+	for i in range(1,pages_of_reviews(id)+1):
+		url = 'http://www.ratemyprofessors.com/paginate/professors/ratings?tid=' + str(id) + '&page=' + str(i)
+		page=urllib.urlopen(url).read()
+
+		data = json.loads(page)
+		reviews.append(data['ratings'])
+	
+	return reviews
+
+def format_reviews(id):
+	formatted_reviews = []
+	reviews = get_all_reviews(id)
+
+	class_name = ''
+	grade_received = ''
+	date = ''
+	comments = ''
+	easy = ''
+	clarity = ''
+	helpful = ''
+
+	for i in reviews:
+		for j in i:
+			temp = {}
+			temp['class_name'] = j['rClass']
+			temp['grade_received'] = j['teacherGrade']
+			temp['date'] = j['rDate']
+			temp['comments'] = j['rComments']
+			temp['easy'] = j['rEasy']
+			temp['clarity'] = j['rClarity']
+			temp['helpful'] = j['rHelpful']
+			formatted_reviews.append(temp)
+
+	return formatted_reviews
+
+def get_name(id):
+	html = urllib.urlopen('http://www.ratemyprofessors.com/ShowRatings.jsp?tid='+id)
+	soup = Soup(html)
+	try:
+		return soup.find('span',{'class':'pfname'}).text + ' ' + soup.find('span',{'class':'plname'}).text
+	except:
+		return None
+
+def create_teacher_webpage(id,values):
+
+	reviews = format_reviews(id)
+	if get_name(id) == None: return
+	name = get_name(id).encode('utf-8').replace('í','i')
+
+	picture_name = name.replace(' ','-').lower()
+	if not os.path.exists('teacher_pictures/' + picture_name):
+		picture_name = 'default'
+
+	with open('teachers/' + name.replace(' ','-').replace('/','').lower() + '.html','w') as output:
+		html = '<!DOCTYPE html><html><head><title>' + name + ' - ' + values[0] + '</title><link rel="shortcut icon" href="../icon.png"><link rel="stylesheet" type="text/css" href="../stylesheet.css"></head><style type="text/css">img.alignleft{ float: left; margin: 0 1em 1em 0;}.alignleft{ float: left; }#left{width: 200px;height: 100px;float: left;padding-bottom:30px;padding-top: 20px;}#right{height: 100px;margin-left: 200px; padding-bottom: 30px;padding-top: 20px;}</style><h1>'
+		html += name
+		html += '<hr></h1><div style="height: 260px;"><img src="../teacher_pictures/'+ picture_name +'" alt="professor" title="professor" class="alignleft" height="250" width="250"/><h2>'
+		
+		html += 'Overall Quality: ' + values[0] + '<br><br>'
+		html += 'Helpfulness: ' + values[1] + '<br>'
+		html += 'Clarity: ' + values[2] + '<br>'
+		html += 'Easiness: ' + values[3]
+
+		html += '</h2></div><h2>Student Reviews</h2><hr>'
+
+		for i in reviews:
+			html += '<div id="container"><div id="left">'
+
+			html += 'Date: ' + str(i['date']) + '<br>'
+			html += 'Class Name: ' + str(i['class_name']) + '<br>'
+			html += 'Helpfulness: ' + str(i['helpful']) + '<br>'
+			html += 'Clarity: ' + str(i['clarity']) + '<br>'
+			html += 'Easiness: ' + str(i['easy']) + '<br>'
+			html += 'Grade Received: ' + str(i['grade_received'])
+
+			html += '</div><div id="right"><div>'
+
+			html += i['comments']
+
+			html += '</div></div></div>'
+
+		html += '</body></html>'
+
+		output.write(html.encode("utf-8", "ignore"))
+
+def create_all_teacher_webpages():
+	data = gather_data()
+	for i in data[2878:]:
+		rating = '0'
+		helpful = '0'
+		clarity = '0'
+		easy = '0'
+
+		try: rating = str(i['averageratingscore_rf'])
+		except: pass
+		try: helpful = str(i['averagehelpfulscore_rf'])
+		except: pass
+		try: clarity = str(i['averageclarityscore_rf'])
+		except: pass
+		try: easy = str(i['averageeasyscore_rf'])
+		except: pass
+
+		create_teacher_webpage(str(i['pk_id']),[rating,helpful,clarity,easy])
+
+
 def main():
 	export_to_csv()
+	create_all_teacher_webpages()
 
 
 if __name__ == '__main__':

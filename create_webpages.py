@@ -13,19 +13,38 @@ def create_webpage(filename):
 		course_description = info[1][0]
 		tags = []
 
-		html = '<!DOCTYPE html><html><head><title>'+title+'</title><link rel="stylesheet" type="text/css" href="../stylesheet.css"></head>'
+		html = '<!DOCTYPE html><html><head><title>'+title+'</title><link rel="shortcut icon" href="../icon.png"><link rel="stylesheet" type="text/css" href="../stylesheet.css"></head>'
 		html += '<h1>'+title+'</h1><body>'+course_description+'<h2>Available Classes</h2><table class="bordered">'
 		html+='<thead><tr>'
 		for i in info[2]:
 			tags.append(i)
 			html+='<th>' + i + '</th>'
 		html+=' </tr></thead>'
-		
+
 		for i in info[3:]:
-			html+='<tr>'
-			for j in i:
-				tags.append(j)
-				html+='<td>' + j + '</td>'
+			if(i[0] != 'N/A'):
+				html+='<tr>'
+
+				tags.append(i[0])
+				html+='<td>' + '<a href = "../teachers/' + i[2].lower()+'-'+i[3].lower() + '.html">' + i[0] + '</a></td>'
+
+				tags.append(i[1])
+				html+='<td>' + i[1] + '</td>'
+
+				tags.append(i[2])
+				html+='<td>' + '<a href = "../teachers/' + i[2].lower()+'-'+i[3].lower() + '.html">' + i[2] + '</a></td>'
+
+				tags.append(i[3])
+				html+='<td>' + '<a href = "../teachers/' + i[2].lower()+'-'+i[3].lower() + '.html">' + i[3] + '</a></td>'
+
+				for j in i[4:]:
+					tags.append(j)
+					html+='<td>' + j + '</td>'
+			else:
+				for j in i:
+					tags.append(j)
+					html+='<td>' + j + '</td>'
+
 			html+=' </tr>'
         
 		html+='</table></body></html>'
