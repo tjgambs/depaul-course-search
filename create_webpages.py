@@ -22,7 +22,7 @@ def create_webpage(filename):
 		html+=' </tr></thead>'
 
 		for i in info[3:]:
-			if(i[0] != 'N/A'):
+			if(i[0] != 'N/A' and os.path.exists('teachers/' + i[2].lower()+'-'+i[3].lower() + '.html')):
 				html+='<tr>'
 
 				tags.append(i[0])
