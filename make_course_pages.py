@@ -13,13 +13,20 @@ def create_webpage(filename):
 		course_description = info[1][0]
 		tags = []
 
-		html = '<!DOCTYPE html><html><head><title>'+title+'</title><link rel="shortcut icon" href="../icon.png"><link rel="stylesheet" type="text/css" href="../stylesheet.css"></head>'
-		html += '<h1>'+title+'</h1><body>'+course_description+'<h2>Available Classes</h2><table class="bordered">'
+		html = '<html><head><title>'+title+'</title><link rel="shortcut icon" href="../icon.png">'
+		html += '<link rel="stylesheet" href="../style.css" type="text/css" media="print, projection, screen" />'
+		html += '<script type="text/javascript" src="../jquery-1.11.3.min.js"></script>'
+		html += '<script type="text/javascript" src="../jquery.tablesorter.min.js"></script></head>'
+
+		html += '<script type="text/javascript">$(document).ready(function(){$("#myTable").tablesorter(); }); </script>'
+
+		html += '<h1>'+title+'</h1><body>'+course_description+'<h2>Available Classes</h2><table id="myTable" class="tablesorter">'
 		html+='<thead><tr>'
+
 		for i in info[2]:
 			tags.append(i)
 			html+='<th>' + i + '</th>'
-		html+=' </tr></thead>'
+		html+=' </tr></thead><tbody>'
 
 		for i in info[3:]:
 			if(i[0] != 'N/A' and os.path.exists('teachers/' + i[3].replace(' ','-').lower()+'-'+i[4].replace(' ','-').lower() + '.html')):
@@ -50,7 +57,7 @@ def create_webpage(filename):
 
 			html+=' </tr>'
         
-		html+='</table></body></html>'
+		html+='</tbody></table></body></html>'
 
 		with open('classes/'+title.replace(' ','-').replace('/','').replace(';','')+'.html','w') as output:
 			output.write(html)
