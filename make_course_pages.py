@@ -29,6 +29,12 @@ def create_webpage(filename):
 		html+=' </tr></thead><tbody>'
 
 		for i in info[3:]:
+
+			for k in range(len(i)):
+				if len(i[k]) == 0: 
+					i[k] = '&nbsp;'
+
+
 			if(i[0] != 'N/A' and os.path.exists('teachers/' + i[3].replace(' ','-').lower()+'-'+i[4].replace(' ','-').lower() + '.html')):
 				html+='<tr>'
 
