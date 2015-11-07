@@ -154,19 +154,11 @@ def format_reviews(id):
 
 	return formatted_reviews
 
-def get_name(id):
-	html = urllib.urlopen('http://www.ratemyprofessors.com/ShowRatings.jsp?tid='+id)
-	soup = Soup(html)
-	try:
-		return soup.find('span',{'class':'pfname'}).text + ' ' + soup.find('span',{'class':'plname'}).text
-	except:
-		return None
-
-def create_teacher_webpage(id,values):
+def create_teacher_webpage(id,name,values):
 
 	reviews = format_reviews(id)
-	if get_name(id) == None: return
-	name = get_name(id).encode('utf-8').replace('í','i')
+	if name == None: return
+	name = name.encode('utf-8').replace('í','i')
 
 	picture_name = name.replace(' ','-').lower()
 	if not os.path.exists('teacher_pictures/' + picture_name):
@@ -175,14 +167,21 @@ def create_teacher_webpage(id,values):
 	with open('teachers/' + name.replace(' ','-').replace('/','').lower() + '.html','w') as output:
 		html = '<!DOCTYPE html><html><head><title>' + name + ' - ' + values[0] + '</title><link rel="shortcut icon" href="../icon.png"><link rel="stylesheet" type="text/css" href="../stylesheet.css"></head><style type="text/css">img.alignleft{ float: left; margin: 0 1em 1em 0;}.alignleft{ float: left; }#left{width: 200px;height: 100px;float: left;padding-bottom:30px;padding-top: 20px;}#right{height: 100px;margin-left: 200px; padding-bottom: 30px;padding-top: 20px;}</style><h1>'
 		html += name
-		html += '<hr></h1><div style="height: 260px;"><img src="../teacher_pictures/'+ picture_name +'" alt="professor" title="professor" class="alignleft" height="250" width="250"/><h2>'
+		html += '<hr></h1><div>'
+		
+		#Uncomment if you want to have the pictures of each professor
+		#Make the div above <div style="height: 260px;"> to make it look better
+
+		#html += '<img src="../teacher_pictures/'+ picture_name +'" alt="professor" title="professor" class="alignleft" height="250" width="250"/>'
+		
+		html += '<h2>'
 		
 		html += 'Overall Quality: ' + values[0] + '<br><br>'
 		html += 'Helpfulness: ' + values[1] + '<br>'
 		html += 'Clarity: ' + values[2] + '<br>'
 		html += 'Easiness: ' + values[3]
 
-		html += '</h2></div><h2>Student Reviews</h2><hr>'
+		html += '</h2></div><h1>Student Reviews</h1><hr>'
 
 		for i in reviews:
 			html += '<div id="container"><div id="left">'
@@ -211,7 +210,10 @@ def create_all_teacher_webpages():
 		helpful = '0'
 		clarity = '0'
 		easy = '0'
+		name = None
 
+		try: name = i['teacherfirstname_t'] + ' ' + i['teacherlastname_t']
+		except: pass
 		try: rating = str(i['averageratingscore_rf'])
 		except: pass
 		try: helpful = str(i['averagehelpfulscore_rf'])
@@ -221,7 +223,7 @@ def create_all_teacher_webpages():
 		try: easy = str(i['averageeasyscore_rf'])
 		except: pass
 
-		create_teacher_webpage(str(i['pk_id']),[rating,helpful,clarity,easy])
+		create_teacher_webpage(str(i['pk_id']),name,[rating,helpful,clarity,easy])
 
 
 def main():

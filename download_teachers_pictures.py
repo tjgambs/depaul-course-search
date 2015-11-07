@@ -1,6 +1,6 @@
 from BeautifulSoup import BeautifulSoup
 import urllib
-import cdm_teachers
+import download_cdm_pictures
 
 #Works for Buisiness
 #Communications
@@ -48,7 +48,7 @@ def main():
 
     for url in urls:
         download_images(url[0],url[1],url[2])
-    cdm_teachers.main()
+    download_cdm_pictures.main()
 
 if __name__ == '__main__':
     main()
