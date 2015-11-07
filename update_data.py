@@ -59,10 +59,10 @@ def download_classes():
 
 
 def format_classes():
-	headers = ['RMP Overall','Class Status','Credit Hours', 'Teacher First Name', 'Teacher Last Name', 'Class Start Time', 'Class End Time', 'Class Section', 'Class Number', 'Location', 'Days']
+	headers = ['Overall Rating','Class Status','Credit Hours', 'Teacher First Name', 'Teacher Last Name', 'Class Start Time', 'Class End Time', 'Class Section', 'Class Number', 'Location', 'Days']
 
 	with open('classes.json','r') as input:
-		class_data = json.load(input)
+		class_data = json.loads(input.read())
 		for i in range(len(class_data)):
 
 			class_name = str(class_data[i][0])
@@ -116,7 +116,7 @@ def format_classes():
 						days[6] = 'Sunday'
 
 				days = filter(lambda a: a != 0, days)
-				days =','.join(days)
+				days =', '.join(days)
 
 				rmp_overall = overall_rating(teacher_first_name,teacher_last_name)
 
@@ -140,8 +140,8 @@ def overall_rating(first,last):
 
 
 def main():
-	download_classes()
-	format_classes()
+    download_classes()
+    format_classes()
 
 if __name__ == '__main__':
 	main()

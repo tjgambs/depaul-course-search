@@ -164,12 +164,14 @@ def create_teacher_webpage(id,name,values):
 		picture_name = 'default'
 
 	with open('teachers/' + name.replace(' ','-').replace('/','').lower() + '.html','w') as output:
-		html = '<!DOCTYPE html><html><head><title>' + name + ' - ' + values[0] + '</title><link rel="shortcut icon" href="../icon.png"><link rel="stylesheet" type="text/css" href="../stylesheet.css"></head><style type="text/css">img.alignleft{ float: left; margin: 0 1em 1em 0;}.alignleft{ float: left; }#left{width: 200px;height: 100px;float: left;padding-bottom:30px;padding-top: 20px;}#right{height: 100px;margin-left: 200px; padding-bottom: 30px;padding-top: 20px;}</style><h1>'
+		html = '''<!DOCTYPE html><html><head><title>' + name + ' - ' + values[0] + '</title><link rel="shortcut icon" href="../icon.png">
+					<link rel="stylesheet" type="text/css" href="../stylesheet.css"></head><style type="text/css">img.alignleft{ float: left; 
+					margin: 0 1em 1em 0;}.alignleft{ float: left; }#left{width: 200px;height: 100px;float: left;padding-bottom:30px;padding-top: 20px;}
+					#right{height: 100px;margin-left: 200px; padding-bottom: 30px;padding-top: 20px;}</style><h1>'''
+		
 		html += name
-		html += '<hr></h1><div>'
-		
-		html += '<h2>'
-		
+		html += '<hr></h1><div><h2>'
+
 		html += 'Overall Quality: ' + values[0] + '<br><br>'
 		html += 'Helpfulness: ' + values[1] + '<br>'
 		html += 'Clarity: ' + values[2] + '<br>'
@@ -221,8 +223,8 @@ def create_all_teacher_webpages():
 
 
 def main():
-	export_to_csv()
-	create_all_teacher_webpages()
+    export_to_csv()
+    create_all_teacher_webpages()
 
 
 if __name__ == '__main__':

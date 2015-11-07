@@ -3,5 +3,5 @@ CSC 554 ADVANCED DATABASE MANAGEMENT
 This class explores methods and techniques to achieve the availability needs and also focuses on how to protect the database against disasters by maintaining multiple copies of the databases in
 separate locations, synchronized in real-time.   Students learn to  
 design and manage key business resumption functions including disaster recovery plans and business continuity plans.  Data governance challenges will be discussed along with solutions including data life cycle management, preservation, retention, and disposition.  Prerequisite(s):  CSC 453 or CSC 454"
-RMP Overall,Class Status,Credit Hours,Teacher First Name,Teacher Last Name,Class Start Time,Class End Time,Class Section,Class Number,Location,Days
+Overall Rating,Class Status,Credit Hours,Teacher First Name,Teacher Last Name,Class Start Time,Class End Time,Class Section,Class Number,Location,Days
 4.36,Open,4,Marco,Chou,,,820,22720,OnLine,
