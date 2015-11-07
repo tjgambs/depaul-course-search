@@ -1,3 +1,6 @@
+#Created by Timothy Gamble
+#tjgambs@gmail.com
+
 from fabric.api import local
 
 def commit_push():

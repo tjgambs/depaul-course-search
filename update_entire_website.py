@@ -4,15 +4,14 @@
 import update_data as one
 import make_course_pages as two
 import make_teacher_pages as three
-
 import fabfile as four
 
 def main():
-	#one.main()
+	one.main()
 	print 'Finished Step One!'
-	#two.main()
+	two.main()
 	print 'Finished Step Two!'
-	#three.main()
+	three.main()
 	print 'Finished Step Three!'
 	print 'Running fabric to commit to gh-pages and master'
 	four.commit_push()
