@@ -168,11 +168,6 @@ def create_teacher_webpage(id,name,values):
 		html += name
 		html += '<hr></h1><div>'
 		
-		#Uncomment if you want to have the pictures of each professor
-		#Make the div above <div style="height: 260px;"> to make it look better
-
-		#html += '<img src="../teacher_pictures/'+ picture_name +'" alt="professor" title="professor" class="alignleft" height="250" width="250"/>'
-		
 		html += '<h2>'
 		
 		html += 'Overall Quality: ' + values[0] + '<br><br>'
