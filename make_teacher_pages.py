@@ -24,7 +24,6 @@ how_many_teachers = 'all'
 
 #Write true next to the items you want to have and false to the items you do not want.
 teacher_id 			= True
-teacher_profile			= True
 teacher_first_name 		= True
 teacher_last_name 		= True
 number_of_ratings 		= True
