@@ -36,7 +36,7 @@ def download_classes():
 
 	courses = []
 
-	with open('../other/classes.test.json','w') as output:
+	with open('../other/classes.json','w') as output:
 
 		for ul in soup.findAll('ul',{'class':'columnlist medium'}):
 			a = ul.findAll('a')
@@ -59,7 +59,7 @@ def download_classes():
 
 
 def format_classes():
-	headers = ['Overall Rating','Class Status','Credit Hours','Class Number', 'Teacher First Name', 'Teacher Last Name', 'Class Start Time', 'Class End Time', 'Class Section', 'Class Number', 'Location', 'Days']
+	headers = ['Overall Rating','Class Status','Credit Hours', 'Teacher First Name', 'Teacher Last Name', 'Class Start Time', 'Class End Time', 'Class Section', 'Class Number', 'Location', 'Days']
 
 	with open('../other/classes.json','r') as input:
 		class_data = json.loads(input.read())
@@ -98,8 +98,7 @@ def format_classes():
 						if(value.upper() == 'O'): class_status = 'Open'
 						if(value.upper() == 'C'): class_status = 'Closed'
 						if(value.upper() == 'W'): class_status = 'Waitlist'
-					if key.strip().lower() == 'class_nbr':
-						class_number = str(value)
+
 
 					if key.strip().lower() == 'mon' and value.strip().lower() == 'y':
 						days[0] = 'Monday'
@@ -121,7 +120,7 @@ def format_classes():
 
 				rmp_overall = overall_rating(teacher_first_name,teacher_last_name)
 
-				array_of_class_data.append([rmp_overall,class_status,credit_hours,class_number,teacher_first_name,teacher_last_name,class_start_time,class_end_time,class_section,class_number,class_location,days])
+				array_of_class_data.append([rmp_overall,class_status,credit_hours,teacher_first_name,teacher_last_name,class_start_time,class_end_time,class_section,class_number,class_location,days])
 			with open('../class_data/'+ class_name.replace('/','').replace(';','') +'.csv','w') as formatted_class:
 				writer = csv.writer(formatted_class)
 				writer.writerow([class_name])
@@ -141,7 +140,7 @@ def overall_rating(first,last):
 
 
 def main():
-    download_classes()
+    #download_classes()
     format_classes()
 
 if __name__ == '__main__':
