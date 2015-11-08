@@ -101,7 +101,7 @@ def export_to_csv():
 	data = gather_data()
 	keys = data[0].keys()
 
-	with open('teachers.csv', 'wb') as output_file:
+	with open('../other/teachers.csv', 'wb') as output_file:
 	    dict_writer = csv.DictWriter(output_file, keys)
 	    dict_writer.writeheader()
 	    dict_writer.writerows(data)
@@ -159,14 +159,10 @@ def create_teacher_webpage(id,name,values):
 	if name == None: return
 	name = name.encode('utf-8').replace('í','i')
 
-	picture_name = name.replace(' ','-').lower()
-	if not os.path.exists('teacher_pictures/' + picture_name):
-		picture_name = 'default'
-
-	with open('teachers/' + name.replace(' ','-').replace('/','').lower() + '.html','w') as output:
-		html = '<!DOCTYPE html><html><head><title>' + name + ' - ' + values[0] + '</title><link rel="shortcut icon" href="../icon.png">'
+	with open('../teachers/' + name.replace(' ','-').replace('/','').lower() + '.html','w') as output:
+		html = '<!DOCTYPE html><html><head><title>' + name + ' - ' + values[0] + '</title><link rel="shortcut icon" href="../other/icon.png">'
 		
-		html +=	'''<link rel="stylesheet" type="text/css" href="../stylesheet.css"></head><style type="text/css">img.alignleft{ float: left; 
+		html +=	'''<link rel="stylesheet" type="text/css" href="../css/stylesheet.css"></head><style type="text/css">img.alignleft{ float: left; 
 					margin: 0 1em 1em 0;}.alignleft{ float: left; }#left{width: 200px;height: 100px;float: left;padding-bottom:30px;padding-top: 20px;}
 					#right{height: 100px;margin-left: 200px; padding-bottom: 30px;padding-top: 20px;}</style><h1>'''
 		

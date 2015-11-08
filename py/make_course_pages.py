@@ -14,8 +14,8 @@ def create_webpage(filename):
 		tags = []
 
 		html = '<html><head><title>'+title+'</title>'
-		html += '''<link rel="shortcut icon" href="../icon.png"><link rel="stylesheet" href="../stylesheet.css" type="text/css" media="print, projection, screen" />
-					<script type="text/javascript" src="../jquery-1.11.3.min.js"></script><script type="text/javascript" src="../jquery.tablesorter.min.js"></script>
+		html += '''<link rel="shortcut icon" href="../other/icon.png"><link rel="stylesheet" href="../css/stylesheet.css" type="text/css" media="print, projection, screen" />
+					<script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script><script type="text/javascript" src="../js/jquery.tablesorter.min.js"></script>
 					</head><script type="text/javascript">$(document).ready(function(){$("#myTable").tablesorter(); }); </script>'''
 
 		html += '<h1>'+title+'</h1><body>'+course_description+'<h2>Available Classes</h2><table id="myTable" class="tablesorter">'
@@ -33,7 +33,7 @@ def create_webpage(filename):
 					i[k] = '&nbsp;'
 
 
-			if(i[0] != 'N/A' and os.path.exists('teachers/' + i[3].replace(' ','-').lower()+'-'+i[4].replace(' ','-').lower() + '.html')):
+			if(i[0] != 'N/A' and os.path.exists('../teachers/' + i[3].replace(' ','-').lower()+'-'+i[4].replace(' ','-').lower() + '.html')):
 				html+='<tr>'
 
 				tags.append(i[0])
@@ -63,30 +63,30 @@ def create_webpage(filename):
         
 		html+='</tbody></table></body></html>'
 
-		with open('classes/'+title.replace(' ','-').replace('/','').replace(';','')+'.html','w') as output:
+		with open('../classes/'+title.replace(' ','-').replace('/','').replace(';','')+'.html','w') as output:
 			output.write(html)
 
 		tags = list(set(tags))
 		tags = filter(None, tags)
-		return [title, course_description,tags,('classes/'+title.replace(' ','-').replace('/','').replace(';','')+'.html')]
+		return [title, course_description,tags,('../classes/'+title.replace(' ','-').replace('/','').replace(';','')+'.html')]
 
 
 def create_all_webpages():
 	files = []
-	for file in os.listdir("class_data"):
+	for file in os.listdir("../class_data"):
 		if file.endswith("csv"): 
 			files.append(file)
 	to_be_indexed = []
 
 	for i in files:
-		to_be_indexed.append(create_webpage('class_data/'+i))
+		to_be_indexed.append(create_webpage('../class_data/'+i))
 
 	send_to_be_indexed(to_be_indexed)
 
 
 def send_to_be_indexed(items):
 
-	with open('tipuesearch/tipuesearch_content.js','w') as output:
+	with open('../tipuesearch/tipuesearch_content.js','w') as output:
 		output.write('var tipuesearch = {"pages": [\n')
 		for i in items:
 			title = '""'
