@@ -3,11 +3,11 @@
 
 from fabric.api import local
 
-def commit_push():
+def commit_push(message):
 	#Commits to gh-pages
 	local('git checkout gh-pages')
 	local('git add .')
-	local('git commit -a -m "Updated entire website automatically from fabfile.py"')
+	local('git commit -a -m "%s"' % message)
 	local('git push')
 
 	#Commits to master
