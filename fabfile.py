@@ -5,6 +5,7 @@ from fabric.api import local
 
 def commit_push(message):
 	#Commits to gh-pages
+	local('rm *.pyc')
 	local('git checkout gh-pages')
 	local('git add .')
 	local('git commit -a -m "%s"' % message)
