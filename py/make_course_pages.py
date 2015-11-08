@@ -33,11 +33,11 @@ def create_webpage(filename):
 					i[k] = '&nbsp;'
 
 
-			if(i[0] != 'N/A' and os.path.exists('../teachers/' + i[3].replace(' ','-').lower()+'-'+i[4].replace(' ','-').lower() + '.html')):
+			if(i[0] != 'N/A' and os.path.exists('../teachers/' + i[4].replace(' ','-').lower()+'-'+i[5].replace(' ','-').lower() + '.html')):
 				html+='<tr>'
 
 				tags.append(i[0])
-				html+='<td>' + '<a href = "../teachers/' + i[3].replace(' ','-').lower()+'-'+i[4].replace(' ','-').lower() + '.html">' + i[0] + '</a></td>'
+				html+='<td>' + '<a href = "../teachers/' + i[4].replace(' ','-').lower()+'-'+i[5].replace(' ','-').lower() + '.html">' + i[0] + '</a></td>'
 
 				tags.append(i[1])
 				html+='<td>' + i[1] + '</td>'
@@ -46,12 +46,15 @@ def create_webpage(filename):
 				html+='<td>' + i[2] + '</td>'
 
 				tags.append(i[3])
-				html+='<td>' + '<a href = "../teachers/' + i[3].replace(' ','-').lower()+'-'+i[4].replace(' ','-').lower() + '.html">' + i[3] + '</a></td>'
+				html+='<td>' + i[3] + '</td>'
 
 				tags.append(i[4])
-				html+='<td>' + '<a href = "../teachers/' + i[3].replace(' ','-').lower()+'-'+i[4].replace(' ','-').lower() + '.html">' + i[4] + '</a></td>'
+				html+='<td>' + '<a href = "../teachers/' + i[4].replace(' ','-').lower()+'-'+i[5].replace(' ','-').lower() + '.html">' + i[4] + '</a></td>'
 
-				for j in i[5:]:
+				tags.append(i[5])
+				html+='<td>' + '<a href = "../teachers/' + i[4].replace(' ','-').lower()+'-'+i[5].replace(' ','-').lower() + '.html">' + i[5] + '</a></td>'
+
+				for j in i[6:]:
 					tags.append(j)
 					html+='<td>' + j + '</td>'
 			else:
