@@ -97,7 +97,7 @@ def send_to_be_indexed(items):
 			if i[0]:
 				title = '"{0}"'.format(i[0].replace("\"",'').replace("\r\n",'').replace("\n",''))
 			if i[1]:
-				text = '"{0}"'.format(i[1][:300].replace("\"",'').replace("\r\n",'').replace("\n",''))
+				text = '"{0}"'.format(i[1].replace("\"",'').replace("\r\n",'').replace("\n",''))
 			if i[2]:
 				tags = ', '.join('{0}'.format(j) for j in set(i[2]))
 				tags = '"{0}"'.format(tags.replace("\"",'').replace("\r\n",'').replace("\n",''))
