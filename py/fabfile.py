@@ -1,7 +1,7 @@
 #Created by Timothy Gamble
 #tjgambs@gmail.com
 
-from fabric.api import local,cd
+from fabric.api import local, cd
 
 def commit_push(message):
 	with cd('../'):
