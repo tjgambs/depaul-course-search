@@ -36,7 +36,7 @@ def download_classes():
 
 	courses = []
 
-	with open('classes.json','w') as output:
+	with open('../other/classes.json','w') as output:
 
 		for ul in soup.findAll('ul',{'class':'columnlist medium'}):
 			a = ul.findAll('a')
@@ -61,7 +61,7 @@ def download_classes():
 def format_classes():
 	headers = ['Overall Rating','Class Status','Credit Hours', 'Teacher First Name', 'Teacher Last Name', 'Class Start Time', 'Class End Time', 'Class Section', 'Class Number', 'Location', 'Days']
 
-	with open('classes.json','r') as input:
+	with open('../other/classes.json','r') as input:
 		class_data = json.loads(input.read())
 		for i in range(len(class_data)):
 
@@ -121,7 +121,7 @@ def format_classes():
 				rmp_overall = overall_rating(teacher_first_name,teacher_last_name)
 
 				array_of_class_data.append([rmp_overall,class_status,credit_hours,teacher_first_name,teacher_last_name,class_start_time,class_end_time,class_section,class_number,class_location,days])
-			with open('class_data/'+ class_name.replace('/','').replace(';','') +'.csv','w') as formatted_class:
+			with open('../class_data/'+ class_name.replace('/','').replace(';','') +'.csv','w') as formatted_class:
 				writer = csv.writer(formatted_class)
 				writer.writerow([class_name])
 				writer.writerow([class_description])
@@ -132,7 +132,7 @@ def format_classes():
 
 
 def overall_rating(first,last):
-	reader = csv.DictReader(open('teachers.csv'))
+	reader = csv.DictReader(open('../other/teachers.csv'))
 	for row in reader:
 		if first.lower() == row['teacherfirstname_t'].lower() and last.lower() == row['teacherlastname_t'].lower():
 			return row['averageratingscore_rf']
@@ -140,7 +140,7 @@ def overall_rating(first,last):
 
 
 def main():
-    download_classes()
+    #download_classes()
     format_classes()
 
 if __name__ == '__main__':
