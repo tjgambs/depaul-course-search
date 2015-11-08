@@ -68,7 +68,7 @@ def create_webpage(filename):
 
 		tags = list(set(tags))
 		tags = filter(None, tags)
-		return [title, course_description,tags,('../classes/'+title.replace(' ','-').replace('/','').replace(';','')+'.html')]
+		return [title, course_description,tags,('classes/'+title.replace(' ','-').replace('/','').replace(';','')+'.html')]
 
 
 def create_all_webpages():
